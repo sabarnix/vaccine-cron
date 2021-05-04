@@ -1,0 +1,37 @@
+extends layout
+
+block content
+  .container
+    h1 Available Slots
+    table
+      thead
+        tr
+          th Centers
+          th Pin code
+          th Free/Paid
+          th Sessions
+      tbody
+        each center, i in centers
+          tr(class=(i % 2 == 0) ? 'odd' : 'even') 
+            td= center.name
+            td= center.pincode
+            td= center.fee_type
+            td
+              each session, i in center.sessions
+                if (session.available_capacity)
+                  table 
+                    thead 
+                      tr 
+                        th Date 
+                        th= session.date
+                    tbody 
+                        tr
+                          th Available
+                          td= session.available_capacity
+                        tr 
+                          th Slots
+                          td= session.slots.join(', ')
+                        tr 
+                          th Vaccine
+                          td= session.vaccine
+              
